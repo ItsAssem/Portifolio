@@ -14,7 +14,7 @@ const Card2: React.FC<Card2Props> = ({
   tags = ["React"],
 }) => {
   return (
-    <div className="CardContainer flex flex-col justify-center bg-green-900/30 max-h-50dvh outline-1 p-6 min-h-3/4 h-120 w-full min-w-[350px] rounded-2xl overflow-hidden backdrop-blur-lg border border-green-500/50 shadow-lg whitespace-pre-line animate-liquid-glow">
+    <div className="CardContainer flex flex-col justify-center bg-black/40 backdrop-blur-md max-h-50dvh outline-1 p-6 min-h-3/4 h-120 w-full min-w-[350px] rounded-2xl border border-green-500/30 shadow-lg whitespace-pre-line drop-shadow-[0_0_20px_rgba(34,197,94,0.3)]">
       <div>
         <h2 className="CardTitle text-center grow text-lg sm:text-xl md:text-2xl font-bold text-green-400 mb-3 animate-text-glow whitespace-normal">
           {title}
@@ -35,7 +35,7 @@ const Card2: React.FC<Card2Props> = ({
         </p>
       </div>
       <a
-        className="mt-auto border-2 text-center border-green-500/70 rounded-2xl px-3 py-1.5 text-green-400 hover:scale-105 transition-transform bg-green-900/20 backdrop-blur-sm hover:bg-green-800/30 animate-shadow-glow"
+        className="mt-auto border-2 text-center border-green-500/50 rounded-2xl px-3 py-1.5 text-green-400 hover:scale-105 transition-all duration-300 bg-green-900/20 backdrop-blur-sm hover:bg-green-800/30 hover:shadow-[0_0_15px_rgba(34,197,94,0.6)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40"
         href={githubLink}
         target="_blank"
         rel="noopener noreferrer"

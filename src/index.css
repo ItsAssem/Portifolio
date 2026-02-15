@@ -68,36 +68,36 @@ body {
 }
 @keyframes shadow-glow {
   0% {
-    box-shadow: 0 4px 15px 5px rgba(0, 255, 0, 0.5); /* Bright Green */
+    box-shadow: 0 2px 8px 2px rgba(0, 255, 0, 0.3); /* Bright Green - reduced spread */
   }
   25% {
-    box-shadow: 0 4px 15px 5px rgba(50, 205, 50, 0.5); /* Lime Green */
+    box-shadow: 0 2px 8px 2px rgba(50, 205, 50, 0.3); /* Lime Green - reduced spread */
   }
   50% {
-    box-shadow: 0 4px 15px 5px rgba(0, 128, 0, 0.5); /* Forest Green */
+    box-shadow: 0 2px 8px 2px rgba(0, 128, 0, 0.3); /* Forest Green - reduced spread */
   }
   75% {
-    box-shadow: 0 4px 15px 5px rgba(144, 238, 144, 0.5); /* Light Green */
+    box-shadow: 0 2px 8px 2px rgba(144, 238, 144, 0.3); /* Light Green - reduced spread */
   }
   100% {
-    box-shadow: 0 4px 15px 5px rgba(0, 255, 0, 0.5); /* Back to Bright Green */
+    box-shadow: 0 2px 8px 2px rgba(0, 255, 0, 0.3); /* Back to Bright Green - reduced spread */
   }
 }
 @keyframes text-glow {
   0% {
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Bright Green */
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.4); /* Bright Green - reduced */
   }
   25% {
-    text-shadow: 0 0 10px rgba(50, 205, 50, 0.7); /* Lime Green */
+    text-shadow: 0 0 8px rgba(50, 205, 50, 0.4); /* Lime Green - reduced */
   }
   50% {
-    text-shadow: 0 0 10px rgba(0, 128, 0, 0.7); /* Forest Green */
+    text-shadow: 0 0 8px rgba(0, 128, 0, 0.4); /* Forest Green - reduced */
   }
   75% {
-    text-shadow: 0 0 10px rgba(144, 238, 144, 0.7); /* Light Green */
+    text-shadow: 0 0 8px rgba(144, 238, 144, 0.4); /* Light Green - reduced */
   }
   100% {
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Back to Bright Green */
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.4); /* Back to Bright Green - reduced */
   }
 }
 .animate-liquid-flow {
