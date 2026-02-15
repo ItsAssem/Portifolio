@@ -1,5 +1,5 @@
-import React from "react";
 import "./BackGroundEff.css";
+
 export default function BackGroundEff() {
   return (
     <div className="grid-container">
