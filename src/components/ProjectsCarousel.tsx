@@ -21,7 +21,7 @@ interface ProjectsCarouselProps {
 const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects }) => {
   return (
     <div className="overflow-hidden flex flex-col justify-center align-middle content-center max-w-5xl w-full h-max">
-      <h1 className="top-0 text-2xl sm:text-3xl font-bold text-green-500 mb-6 text-center">
+      <h1 className="top-0 text-2xl sm:text-3xl font-extrabold text-green-500 mb-8 text-center">
         My Projects
       </h1>
       <div className="flex-row w-full max-w-7xl mx-auto h-max">
