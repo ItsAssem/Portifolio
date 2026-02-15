@@ -23,9 +23,6 @@ function App() {
         <div className="skeleton3" id="section-3">
           <ContactMe />
         </div>
-        <div className="skeleton4" id="section-4">
-          <AboutMe />
-        </div>
       </div>
     </div>
   );

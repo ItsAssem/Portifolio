@@ -3,8 +3,8 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const ContactMe = () => {
   return (
-    <div className="SCREEN w-full h-full flex justify-center items-center align-middle font-serif text-base relative">
-      <div className="flex flex-col h-auto max-w-3xl border-2 p-5 m-5 gap-3 border-green-300   justify-center align-middle  animate-shadow-glow relative rounded-2xl">
+    <div className="SCREEN w-full h-full flex justify-center items-center align-middle font-serif text-base relative ">
+      <div className="flex flex-col h-auto max-w-3xl border-2 p-5 m-5 gap-3 border-green-300   justify-center align-middle  animate-shadow-glow relative rounded-2xl bg-green-800/20 backdrop-blur-xl">
         <div className=" ROW1Box flex flex-col  ">
           <h2 className="  text-3xl font-bold text-center text-green-700 m-auto py-3 animate-text-glow">
             Ready to talk?
