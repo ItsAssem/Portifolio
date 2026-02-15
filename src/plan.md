@@ -1,78 +1,80 @@
 # My Projects Carousel Refactor Plan
 
-## 1) Baseline + Audit (no code changes)
+## Phase 0) Baseline + audit (no visual changes)
 - Identify the render chain:
   - `MyProjects.tsx` (section frame / outer container)
   - `ProjectsCarousel.tsx` (carousel/slider layout)
   - `components/Card/Card.tsx` (project card UI)
 - Inventory current glow sources:
   - `index.css`: `animate-shadow-glow`, `animate-liquid-glow`, `animate-text-glow`
-  - Component classes: borders (`border-2 border-green-300`, `border-green-500/50`) + glow animations applied simultaneously
-- Define the *target visual hierarchy*:
-  - Strong header
-  - Clear card separation (gap + min width)
-  - Subtle card glow (drop-shadow) that doesn’t reduce text legibility
-  - CTA button glow that intensifies on hover
+  - Component classes: borders + glow animations stacked together
+- Confirm the target outcomes:
+  - Clear spacing inside cards (no cramped edges)
+  - More readable text (titles pop, descriptions quieter)
+  - Glows are controlled (no bleed between cards)
+  - Carousel feels like a slider (not a static grid)
 
-## 2) Layout + Spacing (carousel feels polished, not a static grid)
-- Update `MyProjects.tsx` section frame:
-  - Keep content centered with `flex` + `justify-center` + `items-center`
-  - Reduce border emphasis (avoid thick bright border around the whole section)
-  - Prefer a subtle frame background and rely on the card glow for depth
-- Update `ProjectsCarousel.tsx`:
-  - Set the “My Projects” header to heavier weight (e.g., `font-extrabold`)
-  - Increase spacing between cards to `gap-8` equivalent:
-    - If using Swiper: set `spaceBetween={32}`
-  - Ensure each slide/card has a `min-width` around `350px`:
-    - Use Swiper `slidesPerView="auto"` + slide width classes like `!w-[350px]`
-  - Center the carousel within the frame:
-    - Use `mx-auto` + a consistent max width (`max-w-6xl` / `max-w-7xl`)
+## Phase 1) Typography + internal spacing (smallest change)
+**Goal:** Improve hierarchy and readability without changing glow style yet.
 
-## 3) Card UI (refined glassmorphism + breathing room)
-- Update `components/Card/Card.tsx`:
-  - Increase internal padding to Tailwind scale (`p-6` or `p-8`)
-  - Apply refined glassmorphism:
-    - `bg-black/40`
-    - `backdrop-blur-md`
-  - Reduce border intensity:
-    - Use a subtle border like `border border-green-500/20`
-  - Apply card glow via **drop-shadow** (not border glow):
-    - Use Tailwind arbitrary `drop-shadow-[...]` so glow doesn’t “fill” the background
-  - Improve typography hierarchy:
-    - Title stays bright and higher contrast
-    - Description uses lower opacity (e.g., `text-green-100/70`) and comfortable line-height
-  - Ensure tags don’t crowd edges:
-    - Use consistent spacing (`mt-3`, `gap-2`, etc.) and avoid tight `p-1 m-1` stacking
+- `ProjectsCarousel.tsx`
+  - Make the “My Projects” header heavier (e.g., `font-extrabold`).
+  - Increase spacing under the header (e.g., `mb-8`).
+- `components/Card/Card.tsx`
+  - Increase internal padding to `p-6` (or `p-8`).
+  - Make project description lower emphasis: `text-green-100/70`.
+  - Add consistent spacing between title / tags / description / CTA.
 
-## 4) CTA Button (box-shadow glow + hover intensification)
-- Update “Project Link” anchor styles:
-  - Use a **box-shadow** glow (Tailwind `shadow-[...]`) for the button
-  - Add a hover state that intensifies glow and slightly lifts:
-    - `hover:shadow-[...]`
-    - `hover:-translate-y-0.5` (or `hover:scale-[1.02]`)
-  - Add an accessible focus style:
-    - `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/60`
+**Checkpoint:**
+- Card content has breathing room.
+- Titles read first; descriptions feel secondary.
 
-## 5) Glow Optimization (reduce glow bleed, keep vibe)
-- Refactor glow-related CSS in `index.css`:
-  - Reduce radii and alpha in `shadow-glow` and `liquid-glow` keyframes
-  - Keep glow subtle enough to avoid “bleeding” between adjacent cards
-  - Ensure `prefers-reduced-motion` fallback remains intact
-- Prefer component-level glow:
-  - Cards: drop-shadow glow
-  - Buttons: box-shadow glow
-  - Avoid stacking multiple glow animations + thick borders simultaneously
+## Phase 2) Carousel spacing + sizing (make it feel like a slider)
+**Goal:** Increase separation between cards and prevent cramped widths.
 
-## 6) Responsiveness + QA Checklist
-- Verify min-width behavior:
-  - Cards are never narrower than ~350px
-  - On small screens, horizontal scroll/slider feels natural
-- Verify spacing:
-  - Card padding `p-6`/`p-8`
-  - Between-cards spacing ~`gap-8`
-- Verify legibility:
-  - Title readable at a glance
-  - Description intentionally quieter (`text-green-100/70`)
-- Verify glow:
-  - No overlapping/merging glows between adjacent cards
-  - Hover glow on CTA is noticeable but not blinding
+- `ProjectsCarousel.tsx`
+  - Increase between-card spacing to the `gap-8` equivalent:
+    - Swiper: set `spaceBetween={32}`.
+  - Ensure each card has min width ~`350px`:
+    - Option A: set min width on the card (`min-w-[350px]`).
+    - Option B: Swiper `slidesPerView="auto"` and give slides fixed widths.
+  - Ensure shadows/glows are not clipped:
+    - Avoid `overflow-hidden` on wrappers that should show glow.
+
+**Checkpoint:**
+- Cards don’t feel packed.
+- On small screens, horizontal scrolling/slider behavior feels natural.
+
+## Phase 3) Glow + glassmorphism refinement (largest perceived change)
+**Goal:** Reduce glow bleed and refine the “glass” look.
+
+- `components/Card/Card.tsx`
+  - Add refined glassmorphism:
+    - `bg-black/40` + `backdrop-blur-md`.
+  - Soften borders (lower opacity / thinner look).
+  - Use a controlled card glow:
+    - Prefer **drop-shadow** glow instead of heavy animated border glow.
+- CTA button (“Project Link”)
+  - Use a **box-shadow** glow.
+  - Add hover state that intensifies glow + subtle lift.
+  - Add `focus-visible` ring.
+- `index.css`
+  - Tone down global glow animations (lower alpha/spread) so adjacent cards don’t merge.
+
+**Checkpoint:**
+- Glows feel separated and don’t wash over the text.
+- Cards stand out from the background without needing loud borders.
+
+## QA checklist (run after each phase)
+- Spacing:
+  - Card padding is `p-6`/`p-8`.
+  - Between-card spacing reads like `gap-8`.
+- Typography:
+  - Header weight increased.
+  - Description uses lower emphasis (`text-green-100/70`).
+- Responsiveness:
+  - Min width ~350px is respected.
+  - Mobile is scroll/slider-friendly.
+- Glow:
+  - No glow bleed between cards.
+  - CTA hover reads as a clear call-to-action.

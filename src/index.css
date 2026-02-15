@@ -42,13 +42,13 @@ body {
   0%,
   100% {
     box-shadow:
-      0 0 8px rgba(34, 197, 94, 0.28),
-      0 0 16px rgba(34, 197, 94, 0.18);
+      0 0 10px rgba(34, 197, 94, 0.5),
+      0 0 20px rgba(34, 197, 94, 0.3);
   }
   50% {
     box-shadow:
-      0 0 12px rgba(34, 197, 94, 0.36),
-      0 0 22px rgba(34, 197, 94, 0.22);
+      0 0 15px rgba(34, 197, 94, 0.7),
+      0 0 30px rgba(34, 197, 94, 0.4);
   }
 }
 @keyframes gradient-flow {
@@ -68,36 +68,36 @@ body {
 }
 @keyframes shadow-glow {
   0% {
-    box-shadow: 0 4px 12px 2px rgba(0, 255, 0, 0.22); /* Bright Green */
+    box-shadow: 0 4px 15px 5px rgba(0, 255, 0, 0.5); /* Bright Green */
   }
   25% {
-    box-shadow: 0 4px 12px 2px rgba(50, 205, 50, 0.22); /* Lime Green */
+    box-shadow: 0 4px 15px 5px rgba(50, 205, 50, 0.5); /* Lime Green */
   }
   50% {
-    box-shadow: 0 4px 12px 2px rgba(0, 128, 0, 0.22); /* Forest Green */
+    box-shadow: 0 4px 15px 5px rgba(0, 128, 0, 0.5); /* Forest Green */
   }
   75% {
-    box-shadow: 0 4px 12px 2px rgba(144, 238, 144, 0.22); /* Light Green */
+    box-shadow: 0 4px 15px 5px rgba(144, 238, 144, 0.5); /* Light Green */
   }
   100% {
-    box-shadow: 0 4px 12px 2px rgba(0, 255, 0, 0.22); /* Back to Bright Green */
+    box-shadow: 0 4px 15px 5px rgba(0, 255, 0, 0.5); /* Back to Bright Green */
   }
 }
 @keyframes text-glow {
   0% {
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.35); /* Bright Green */
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Bright Green */
   }
   25% {
-    text-shadow: 0 0 8px rgba(50, 205, 50, 0.35); /* Lime Green */
+    text-shadow: 0 0 10px rgba(50, 205, 50, 0.7); /* Lime Green */
   }
   50% {
-    text-shadow: 0 0 8px rgba(0, 128, 0, 0.35); /* Forest Green */
+    text-shadow: 0 0 10px rgba(0, 128, 0, 0.7); /* Forest Green */
   }
   75% {
-    text-shadow: 0 0 8px rgba(144, 238, 144, 0.35); /* Light Green */
+    text-shadow: 0 0 10px rgba(144, 238, 144, 0.7); /* Light Green */
   }
   100% {
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.35); /* Back to Bright Green */
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Back to Bright Green */
   }
 }
 .animate-liquid-flow {
@@ -113,7 +113,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-shadow-glow {
     animation: none;
-    box-shadow: 0 4px 12px 2px rgba(28, 149, 111, 0.22); /* Static #14df9e */
+    box-shadow: 0 4px 15px 5px rgba(28, 149, 111, 0.5); /* Static #14df9e */
   }
 }
 
@@ -129,7 +129,7 @@ body {
 
 @media (max-width: 640px) {
   .animate-shadow-glow {
-    box-shadow: 0 2px 10px 2px rgba(0, 255, 0, 0.22); /* Smaller shadow on mobile */
+    box-shadow: 0 2px 10px 3px rgba(0, 255, 0, 0.5); /* Smaller shadow on mobile */
     animation: shadow-glow 10s ease-in-out infinite; /* Slower for mobile */
   }
 }

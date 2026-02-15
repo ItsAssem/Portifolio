@@ -14,31 +14,26 @@ const Card2: React.FC<Card2Props> = ({
   tags = ["React"],
 }) => {
   return (
-    <div className="CardContainer group flex w-full min-w-[350px] max-w-[420px] flex-col justify-between rounded-2xl border border-green-400/20 bg-black/40 p-6 backdrop-blur-md whitespace-pre-line overflow-hidden drop-shadow-[0_0_18px_rgba(34,197,94,0.18)] hover:drop-shadow-[0_0_26px_rgba(34,197,94,0.26)] transition-[filter,transform] duration-300">
+    <div className="CardContainer flex flex-col justify-center bg-green-900/30 max-h-50dvh outline-1 p-3 min-h-3/4 h-120 w-full rounded-2xl overflow-hidden backdrop-blur-lg border border-green-500/50 shadow-lg whitespace-pre-line animate-liquid-glow">
       <div>
-        <h2 className="CardTitle text-center text-lg sm:text-xl md:text-2xl font-bold text-green-200 mb-4 whitespace-normal">
+        <h2 className="CardTitle text-center grow text-lg sm:text-xl md:text-2xl font-bold text-green-400 mb-3 animate-text-glow whitespace-normal">
           {title}
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-2">
-          {tags.map((tag, index) => (
-            <span
-              className="inline-block rounded-full border border-green-400/15 bg-green-500/10 px-3 py-1 text-xs sm:text-sm font-medium text-green-200/90 hover:bg-green-500/15 transition-colors"
-              key={index}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {tags.map((tag, index) => (
+          <span
+            className="inline-block bg-[#00df9a]/30 text-green-300 text-xs sm:text-sm font-medium p-1 m-1  rounded-full hover:bg-green-800/40 backdrop-blur-sm"
+            key={index}
+          >
+            {tag}
+          </span>
+        ))}
       </div>
-
-      <div className="mt-5">
-        <p className="CardDesc overflow-auto text-sm sm:text-base leading-relaxed text-green-100/70">
-          {description}
-        </p>
+      <div className="p-3 justify-center">
+        <p className="CardDesc grow overflow-auto p3 m3">{description}</p>
       </div>
       <a
-        className="mt-6 inline-flex items-center justify-center rounded-2xl border border-green-400/25 bg-green-500/5 px-4 py-2 text-center text-sm sm:text-base font-semibold text-green-200 shadow-[0_0_16px_rgba(34,197,94,0.18)] transition-[box-shadow,transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-green-500/10 hover:shadow-[0_0_26px_rgba(34,197,94,0.34)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black/60"
+        className="mt-auto border-2 text-center border-green-500/70 rounded-2xl px-3 py-1.5 text-green-400 hover:scale-105 transition-transform bg-green-900/20 backdrop-blur-sm hover:bg-green-800/30 animate-shadow-glow"
         href={githubLink}
         target="_blank"
         rel="noopener noreferrer"

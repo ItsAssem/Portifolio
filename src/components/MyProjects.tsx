@@ -37,8 +37,8 @@ const MyProjects = () => {
   ];
 
   return (
-    <div className="w-full px-4 sm:px-6 py-10 flex justify-center items-center font-serif text-base">
-      <div className="w-full max-w-6xl rounded-2xl border border-green-400/15 bg-black/20 backdrop-blur-sm px-4 sm:px-8 py-10">
+    <div className="h-full flex justify-center align-middle items-center font-serif text-base  sm:p-5 w-full ">
+      <div className="flex  w-full max-w-6xl overflow-hidden justify-center align-middle items-center py-10  m-1 border-2 border-green-300 rounded-2xl animate-shadow-glow ">
         <ProjectsCarousel projects={projects} />
       </div>
     </div>

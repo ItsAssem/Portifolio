@@ -20,24 +20,36 @@ interface ProjectsCarouselProps {
 
 const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects }) => {
   return (
-    <div className="flex w-full max-w-6xl flex-col justify-center">
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-green-300 mb-8 text-center tracking-tight">
+    <div className="overflow-hidden flex flex-col justify-center align-middle content-center max-w-5xl w-full h-max">
+      <h1 className="top-0 text-2xl sm:text-3xl font-bold text-green-500 mb-6 text-center">
         My Projects
       </h1>
-      <div className="w-full mx-auto">
+      <div className="flex-row w-full max-w-7xl mx-auto h-max">
         <Swiper
           modules={[Navigation, Autoplay]}
-          className="overflow-visible!"
-          spaceBetween={32}
+          spaceBetween={10}
           centeredSlides={false}
           autoplay={{ delay: 7000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           loop={true}
-          slidesPerView={"auto"}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1280: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+          }}
         >
           {projects.map((project, index) => (
-            <SwiperSlide key={index} className="w-[350px]! sm:w-[380px]!">
-              <div className="flex items-stretch justify-center h-full py-2">
+            <SwiperSlide key={index}>
+              <div className="flex items-center justify-center h-full">
                 <Card
                   title={project.title}
                   githubLink={project.Glink}
