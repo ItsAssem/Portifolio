@@ -3,7 +3,7 @@ import AboutMe from "./components/AboutMe";
 
 import ContactMe from "./components/ContactMe";
 
-import BackGroundEff from "./components/BackGroundEff";
+import BackGroundEff from "./components/BackGroundEff-edge";
 import MyProjects from "./components/MyProjects";
 
 function App() {
