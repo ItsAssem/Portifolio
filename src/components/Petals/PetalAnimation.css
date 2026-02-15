@@ -1,0 +1,31 @@
+/* src/PetalAnimation.css */
+.petal {
+  position: absolute;
+  top: -5vw; /* Start above viewport */
+  border-radius: 60% 60% 20% 20% / 80% 80% 20% 20%; /* Enhanced petal shape */
+  transform-origin: bottom;
+  will-change: transform, opacity; /* Optimize animation */
+  background-clip: padding-box; /* Ensure clean edges */
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(
+      100dvh
+    ); /* Fall to bottom using dynamic viewport height */
+    opacity: 0.3; /* Fade out for smoothness */
+  }
+}
+
+@keyframes sway {
+  0% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(-20deg);
+  }
+}

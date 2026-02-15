@@ -1,0 +1,60 @@
+/* src/components/GitHubLink/GitHubLink.css */
+
+/* CLI-like terminal container for GitHub link */
+.github-link-container {
+  position: fixed; /* Fixed bottom-left */
+  bottom: clamp(2.5rem, 2vh, 1rem); /* Bottom-left positioning */
+  left: clamp(1rem, 1.5vw, 2rem);
+  z-index: 60; /* Below Fahras (70) */
+  display: inline-flex;
+  align-items: center;
+  padding: clamp(0.5rem, 1vw, 0.5rem);
+  background: #000; /* Black terminal background */
+  border: 1px solid #00ff00; /* Green border like CLI frame */
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3); /* Subtle green glow */
+  border-radius: 0; /* Square edges for CLI look */
+  transition: all 0.3s ease; /* Smooth hover */
+  text-decoration: none;
+}
+
+/* GitHub icon styling */
+.github-icon {
+  width: clamp(20px, 4vw, 30px); /* Responsive size */
+  height: auto;
+  color: #00ff00; /* CLI green */
+  transition: color 0.3s ease;
+}
+
+/* Hover effect: Match Fahras CLI theme */
+.github-link-container:hover {
+  background: rgba(0, 255, 0, 0.2); /* Subtle green highlight */
+  border-color: #ffffff; /* White border on hover */
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Brighter glow */
+}
+
+.github-link-container:hover .github-icon {
+  color: #ffffff; /* White on hover */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .github-link-container {
+    padding: clamp(0.4rem, 0.8vw, 0.8rem);
+    bottom: 2.5rem;
+    left: clamp(1rem, 1.5vw, 2rem);
+  }
+
+  .github-icon {
+    width: clamp(18px, 3.5vw, 25px);
+  }
+}
+
+@media (max-width: 480px) {
+  .github-link-container {
+    padding: clamp(0.3rem, 0.6vw, 0.6rem);
+  }
+
+  .github-icon {
+    width: clamp(16px, 3vw, 22px);
+  }
+}

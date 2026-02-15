@@ -1,0 +1,101 @@
+/* src/components/fahras/fahras.css */
+
+/* CLI-like terminal container */
+.nav-container {
+  position: fixed;
+  top: 50%;
+  left: clamp(1rem, 1.5vw, 2rem);
+  transform: translateY(-50%);
+  z-index: 70;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  max-width: 20vw; /* Narrow for CLI sidebar feel */
+  background: #000; /* Black terminal background */
+  border: 1px solid #00ff00; /* Green border like CLI frame */
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3); /* Subtle green glow */
+  border-radius: 0; /* Square edges for terminal look */
+  font-family: "IBM Plex Mono", monospace; /* CLI-like font, isolated to container */
+}
+
+/* CLI menu list */
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vh, 0.75rem);
+}
+
+/* CLI menu item */
+.nav-list-item {
+  list-style: none;
+  margin: 0;
+}
+
+/* CLI menu link */
+.nav-link {
+  font-family: inherit; /* Inherit CLI font */
+  font-size: clamp(0.8rem, 1.2vw, 1.4rem);
+  font-weight: normal; /* Normal for CLI feel */
+  color: #00ff00; /* Classic CLI green */
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem; /* Slight spacing for code-like feel */
+  text-shadow: none; /* No shadow for clean terminal look */
+  display: block;
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+/* CLI menu prefix (>> for menu items) */
+.nav-link::before {
+  content: ">> ";
+  color: #00ff00;
+  font-weight: bold;
+}
+
+/* Hover effect: Highlight like selected CLI item */
+.nav-link:hover {
+  color: #ffffff; /* White on hover */
+  background: rgba(0, 255, 0, 0.2); /* Subtle green highlight */
+  padding-left: 0.5rem; /* Indent on hover */
+  border-left: 2px solid #00ff00; /* Green bar like cursor */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .nav-container {
+    left: clamp(0.75rem, 2vw, 1.5rem);
+    padding: clamp(0.75rem, 1.5vw, 1.25rem);
+    max-width: 25vw; /* Slightly wider on mobile */
+    background: #000;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); /* Brighter glow on small screens */
+  }
+
+  .nav-list {
+    gap: clamp(0.4rem, 0.8vh, 0.6rem);
+  }
+
+  .nav-link {
+    font-size: clamp(0.7rem, 1vw, 1.2rem);
+  }
+
+  .nav-link::before {
+    content: "> "; /* Shorter prefix on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    right: clamp(0.5rem, 1.5vw, 1rem);
+    padding: clamp(0.5rem, 1vw, 1rem);
+    max-width: 30vw;
+  }
+
+  .nav-link {
+    font-size: clamp(0.6rem, 0.9vw, 1rem);
+    padding: 0.2rem 0;
+  }
+}

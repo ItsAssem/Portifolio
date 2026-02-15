@@ -1,0 +1,122 @@
+/* src/components/ArtLink/ArtLink.css */
+
+/* CLI-like terminal container for ArtLink */
+.art-link-container {
+  display: flex;
+  left: clamp(1rem, 1.5vw, 2rem);
+  align-items: center; /* Vertically center SVG and text */
+  gap: clamp(0.5rem, 1vw, 0.75rem); /* Responsive spacing, wider for CLI feel */
+  background: #000; /* Black terminal background */
+  border: 1px solid #2f412f; /* Green border like CLI frame */
+  box-shadow: 0 0 10px rgba(51, 68, 51, 0.3); /* Subtle green glow */
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border-radius: 0; /* Square edges for CLI look */
+  font-family: "IBM Plex Mono", monospace; /* CLI-like font, isolated to container */
+}
+
+/* SVG styling (art inside CLI frame) */
+.skeleton-link svg {
+  width: clamp(30px, 10vw, 40px);
+  height: auto; /* Maintain aspect ratio */
+  filter: brightness(1.5); /* Slight brighten to pop against black */
+}
+
+/* Text styling to match Fahras CLI theme */
+.art-link-text {
+  font-family: inherit; /* Inherit CLI font */
+  font-size: clamp(0.8rem, 1.2vw, 1.4rem);
+  font-weight: normal; /* Normal for CLI input feel */
+  color: #678c9b; /* Classic CLI green */
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem; /* Code-like spacing */
+  text-shadow: none; /* Clean terminal look */
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Blinking cursor (CLI input cursor) */
+.typing-cursor {
+  display: inline-block;
+  font-family: inherit; /* Match CLI font */
+  font-size: inherit;
+  color: #252b25; /* Match text color */
+  animation: blink-cursor 0.5s step-end infinite;
+  margin-left: 0.1rem;
+}
+
+/* Cursor blink animation (CLI cursor blink) */
+@keyframes blink-cursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Hover effect to match Fahras CLI theme */
+.skeleton-link:hover .art-link-text,
+.skeleton-link:hover .typing-cursor {
+  color: #ffffff; /* White on hover */
+  background: rgba(0, 255, 0, 0.2); /* Subtle green highlight */
+}
+
+/* Blinking animation for .blinkit (SVG element) */
+.blinkit {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .art-link-container {
+    gap: clamp(0.4rem, 0.8vw, 0.6rem);
+    padding: clamp(0.4rem, 0.8vw, 0.8rem);
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); /* Brighter glow on small screens */
+  }
+
+  .art-link-text {
+    font-size: clamp(0.7rem, 1vw, 1.2rem);
+  }
+
+  .typing-cursor {
+    font-size: inherit;
+  }
+
+  .skeleton-link svg {
+    width: clamp(25px, 8vw, 35px);
+  }
+}
+
+@media (max-width: 480px) {
+  .art-link-container {
+    gap: clamp(0.3rem, 0.6vw, 0.5rem);
+    padding: clamp(0.3rem, 0.6vw, 0.6rem);
+  }
+
+  .art-link-text {
+    font-size: clamp(0.6rem, 0.9vw, 1rem);
+  }
+
+  .typing-cursor {
+    font-size: inherit;
+  }
+
+  .skeleton-link svg {
+    width: clamp(20px, 6vw, 30px);
+  }
+}

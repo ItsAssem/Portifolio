@@ -1,0 +1,70 @@
+/* src/components/TypingAnimation/TypingAnimation.css */
+
+/* CLI-like terminal container */
+.typing-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #000; /* Black CLI background */
+  padding: clamp(0.5rem, 1vw, 1rem); /* Responsive padding */
+  border: 1px solid #00ff00; /* Green border */
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3); /* Green glow */
+  border-radius: 0; /* Square for CLI */
+  font-family: "IBM Plex Mono", monospace; /* CLI font */
+  font-size: clamp(1rem, 2vw, 1.5rem); /* Responsive size */
+  color: #00ff00; /* CLI green */
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); /* Green glow */
+  white-space: nowrap;
+  overflow: hidden; /* Contain animation */
+}
+
+/* Animated text */
+.typing-text {
+  display: inline-block;
+}
+
+/* Blinking cursor */
+.typing-cursor {
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  color: #00ff00;
+  animation: blink-cursor 0.5s step-end infinite;
+  margin-left: 0.1rem;
+}
+
+/* Cursor blink animation */
+@keyframes blink-cursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Hover effect (matches Fahras) */
+.typing-container:hover {
+  .typing-text,
+  .typing-cursor {
+    color: #ffffff; /* White on hover */
+  }
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* White glow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .typing-container {
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    padding: clamp(0.4rem, 0.8vw, 0.8rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .typing-container {
+    font-size: clamp(0.7rem, 1.2vw, 1rem);
+    padding: clamp(0.3rem, 0.6vw, 0.6rem);
+  }
+}

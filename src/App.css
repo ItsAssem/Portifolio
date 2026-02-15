@@ -1,0 +1,168 @@
+/* App.css */
+@import "tailwindcss";
+
+/* Main container */
+.skeleton {
+  height: 100dvh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #041b4e00;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Flexbox container */
+.skeleton-flexbox {
+  width: 100vw;
+  height: 100dvh;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column nowrap;
+  background-color: transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.skeleton-flexbox::-webkit-scrollbar {
+  display: none;
+}
+
+/* Section styles */
+.skeleton1,
+.skeleton2,
+.skeleton3,
+.skeleton4 {
+  scroll-snap-align: start;
+  width: 100vw;
+  min-height: 100dvh; /* Changed to min-height to allow content expansion */
+  flex-shrink: 0;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center; /* Changed to flex-start to align content near top */
+  background-color: transparent;
+  z-index: 1;
+}
+
+/* Optional: Debug backgrounds */
+.skeleton1 {
+  background-color: rgba(247, 0, 0, 0);
+}
+.skeleton2 {
+  background-color: rgba(178, 214, 16, 0);
+}
+.skeleton3 {
+  background-color: rgba(179, 19, 126, 0);
+}
+.skeleton4 {
+  background-color: rgba(229, 207, 222, 0);
+}
+
+/* Content container */
+.container {
+  flex: 1;
+  width: 100vw;
+  max-width: 100%;
+}
+
+/* Image styles */
+.skeleton-image1,
+.skeleton-image2,
+.skeleton-image3,
+.skeleton-image4 {
+  width: 100%;
+  height: auto;
+  max-width: clamp(200px, 80vw, 800px);
+  max-height: 80vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Link positioning */
+.skeleton-link {
+  position: absolute;
+  top: clamp(0.5rem, 2vh, 1rem); /* Adjusted for better spacing */
+  left: clamp(0.5rem, 1vw, 1rem);
+  padding: 0.5rem;
+  display: inline-block;
+  z-index: 60;
+}
+
+/* Blinking animation */
+.blinkit {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .skeleton {
+    min-height: 100dvh;
+  }
+
+  .skeleton-flexbox {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .skeleton1,
+  .skeleton2,
+  .skeleton3,
+  .skeleton4 {
+    min-height: 100dvh; /* Ensure min-height for responsiveness */
+  }
+
+  .skeleton-link {
+    padding: 0.5rem;
+    top: 0.25rem;
+    left: 0.25rem;
+  }
+
+  .skeleton-image1,
+  .skeleton-image2,
+  .skeleton-image3,
+  .skeleton-image4 {
+    max-width: clamp(150px, 90vw, 600px);
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton {
+    padding: 0.25rem;
+  }
+
+  .skeleton-image1,
+  .skeleton-image2,
+  .skeleton-image3,
+  .skeleton-image4 {
+    max-width: clamp(100px, 85vw, 400px);
+    max-height: 60vh;
+  }
+
+  .skeleton-link {
+    padding: 0.25rem;
+    top: 0.25rem;
+    left: 0.25rem;
+  }
+}
+
+.github-link-container {
+  z-index: 60;
+}
