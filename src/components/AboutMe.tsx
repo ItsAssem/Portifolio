@@ -1,13 +1,15 @@
 import ProfileImage from "./ProfileImage";
 import { ReactTyped } from "react-typed";
-const pic = "/asem pfp.png";
+
+// Profile picture URL for the hero section
+const profilePictureUrl = "/asem pfp.png";
 const AboutMe = () => {
   return (
     <section className="w-full min-h-screen flex flex-col justify-center items-center px-4">
       <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 bg-green-800/20 backdrop-blur-xl rounded-xl overflow-visible justify-items-center items-center p-4 sm:p-6 md:p-8 m-auto border border-green-500/20 shadow-inner">
         <div className="flex flex-col justify-center items-center w-full h-auto p-4 sm:p-6 md:p-8 md:order-1 order-2 md:scale-100 scale-50 animate-pulse-slow">
           <ProfileImage
-            url={pic}
+            url={profilePictureUrl}
             alt="Assem Kanjo Alnajjar's profile picture"
           />
         </div>

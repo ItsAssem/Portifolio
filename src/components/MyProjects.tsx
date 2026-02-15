@@ -1,24 +1,34 @@
-import React from "react";
 import ProjectsCarousel from "./ProjectsCarousel";
-import { useProjects, type Project } from "../hooks/useProjects";
+import { useProjects } from "../hooks/useProjects";
 import LoadingSkeleton from "./LoadingSkeleton";
-import { testSupabaseConnection } from "../test-connection";
 
+/**
+ * MyProjects component - Main projects section with dynamic data loading.
+ *
+ * Displays projects in a carousel format with loading states, error handling,
+ * and empty state management. Integrates with Supabase backend for real-time
+ * project data.
+ *
+ * @component
+ * @returns {JSX.Element} Rendered projects section with carousel
+ *
+ * @example
+ * ```tsx
+ * <MyProjects />
+ * ```
+ */
 const MyProjects = () => {
+  // Fetch projects data and manage state
   const { projects, loading, error, refetch } = useProjects();
 
-  // Test connection on mount
-  React.useEffect(() => {
-    testSupabaseConnection();
-  }, []);
-
   return (
+    // Main container with responsive layout and glassmorphism styling
     <div className="h-full flex justify-center align-middle items-center font-serif text-base sm:p-5 w-full">
       <div className="flex w-full max-w-6xl overflow-hidden justify-center align-middle items-center py-10 m-1 border-green-300 rounded-2xl">
-        {/* Loading State */}
+        {/* Loading State - Show skeleton while fetching data */}
         {loading && <LoadingSkeleton />}
 
-        {/* Error State */}
+        {/* Error State - Display error with retry functionality */}
         {error && (
           <div className="text-center py-12">
             <p className="text-red-400 text-lg mb-4">
@@ -33,10 +43,10 @@ const MyProjects = () => {
           </div>
         )}
 
-        {/* Projects Carousel */}
+        {/* Success State - Display projects in carousel */}
         {!loading && !error && <ProjectsCarousel projects={projects} />}
 
-        {/* Empty State */}
+        {/* Empty State - No projects found */}
         {!loading && !error && projects.length === 0 && (
           <div className="text-center py-12">
             <p className="text-green-400 text-lg">
