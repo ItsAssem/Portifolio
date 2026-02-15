@@ -20,7 +20,7 @@ interface ProjectsCarouselProps {
 
 const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects }) => {
   return (
-    <div className="flex flex-col justify-center align-middle content-center max-w-5xl w-full h-max">
+    <div className="flex flex-col justify-center align-middle content-center max-w-6xl w-full h-max px-4 py-8">
       <h1 className="top-0 text-2xl sm:text-3xl font-extrabold text-green-500 mb-8 text-center">
         My Projects
       </h1>
@@ -31,21 +31,10 @@ const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects }) => {
           centeredSlides={false}
           autoplay={{ delay: 7000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
-          loop={true}
-          slidesPerView="auto"
+          slidesPerView={1}
           breakpoints={{
-            0: {
-              slidesPerView: "auto",
-              spaceBetween: 32,
-            },
-            768: {
-              slidesPerView: "auto",
-              spaceBetween: 32,
-            },
-            1280: {
-              slidesPerView: "auto",
-              spaceBetween: 32,
-            },
+            768: { slidesPerView: 2, spaceBetween: 24 },
+            1024: { slidesPerView: 3, spaceBetween: 32 },
           }}
         >
           {projects.map((project, index) => (

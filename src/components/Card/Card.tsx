@@ -14,7 +14,7 @@ const Card2: React.FC<Card2Props> = ({
   tags = ["React"],
 }) => {
   return (
-    <div className="CardContainer flex flex-col justify-center bg-black/40 backdrop-blur-md max-h-50dvh outline-1 p-6 min-h-3/4 h-120 w-full min-w-[350px] rounded-2xl border border-green-500/30 shadow-lg whitespace-pre-line drop-shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+    <div className="CardContainer flex flex-col justify-center bg-black/40 backdrop-blur-md max-h-50dvh outline-1 p-8 min-h-3/4 h-120 w-full max-w-md rounded-2xl border-2 border-green-500/50 shadow-lg whitespace-pre-line animate-liquid-glow drop-shadow-[0_0_25px_rgba(34,197,94,0.4)] mx-4 my-4">
       <div>
         <h2 className="CardTitle text-center grow text-lg sm:text-xl md:text-2xl font-bold text-green-400 mb-3 animate-text-glow whitespace-normal">
           {title}
