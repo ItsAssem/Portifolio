@@ -4,7 +4,7 @@ CREATE TABLE projects (
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   tags TEXT[] DEFAULT '{}',
-  link TEXT,
+  Glink TEXT,
   order_index INTEGER DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -30,7 +30,7 @@ CREATE POLICY "Enable delete for authenticated users" ON projects
   FOR DELETE USING (auth.role() = 'authenticated');
 
 -- Insert sample data (you can remove this after testing)
-INSERT INTO projects (title, description, tags, link, order_index) VALUES
+INSERT INTO projects (title, description, tags, Glink, order_index) VALUES
 ('Q-SAR Drone Swarm for Disaster Management', 
  '-Designed and implemented a scalable disaster response system using autonomous drone swarms\n-Developed navigation algorithms and integrated real-time control with Mission Planner and sensor fusion\n-Improved system efficiency by 20% through optimized algorithms and advanced automation',
  ARRAY['React', 'NodeJS', 'DroneKit', 'Python', 'TailWind'],
