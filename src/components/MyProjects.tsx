@@ -2,9 +2,15 @@ import React from "react";
 import ProjectsCarousel from "./ProjectsCarousel";
 import { useProjects, type Project } from "../hooks/useProjects";
 import LoadingSkeleton from "./LoadingSkeleton";
+import { testSupabaseConnection } from "../test-connection";
 
 const MyProjects = () => {
   const { projects, loading, error, refetch } = useProjects();
+
+  // Test connection on mount
+  React.useEffect(() => {
+    testSupabaseConnection();
+  }, []);
 
   return (
     <div className="h-full flex justify-center align-middle items-center font-serif text-base sm:p-5 w-full">

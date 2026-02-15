@@ -13,6 +13,8 @@ const Card2: React.FC<Card2Props> = ({
   description = "An awesome project that does amazing things.",
   tags = ["React"],
 }) => {
+  console.log("Card props:", { title, githubLink, description, tags });
+
   return (
     <div className="CardContainer flex flex-col justify-between bg-black/40 backdrop-blur-md h-[500px] outline-1 p-8 w-full max-w-md rounded-2xl border-2 border-green-500/50 shadow-lg whitespace-pre-line animate-liquid-glow drop-shadow-[0_0_25px_rgba(34,197,94,0.4)] mx-4 my-4">
       <div className="flex flex-col gap-4 shrink-0">
@@ -38,16 +40,22 @@ const Card2: React.FC<Card2Props> = ({
         </p>
 
         {githubLink ? (
-          <a
-            className="mt-auto border-2 border-green-500/50 rounded-full px-6 py-3 text-sm sm:text-base font-semibold text-black bg-linear-to-r from-green-400 to-emerald-500 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 hover:shadow-green-500/40 hover:from-green-500 hover:to-emerald-600 active:scale-95 animate-pulse shrink-0"
-            href={githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Project Link
-          </a>
+          <>
+            {console.log("Rendering button for link:", githubLink)}
+            <a
+              className="mt-auto border-2 border-green-500/50 rounded-full px-6 py-3 text-sm sm:text-base font-semibold text-black bg-linear-to-r from-green-400 to-emerald-500 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 hover:shadow-green-500/40 hover:from-green-500 hover:to-emerald-600 active:scale-95 animate-pulse shrink-0"
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Project Link
+            </a>
+          </>
         ) : (
-          <div className="mt-auto h-[52px] shrink-0"></div>
+          <>
+            {console.log("No link provided, showing placeholder")}
+            <div className="mt-auto h-[52px] shrink-0"></div>
+          </>
         )}
       </div>
     </div>

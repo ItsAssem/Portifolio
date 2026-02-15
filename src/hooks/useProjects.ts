@@ -6,7 +6,7 @@ export interface Project {
   title: string
   description: string
   tags: string[]
-  Glink: string
+  link: string
   order_index: number
   created_at: string
   updated_at: string
@@ -27,12 +27,15 @@ export const useProjects = () => {
         .select('*')
         .order('order_index', { ascending: true })
 
+      console.log('Supabase response:', { data, error })
+
       if (error) {
         setError(error.message)
         setLoading(false)
         return
       }
 
+      console.log('Projects loaded:', data)
       setProjects(data || [])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred')

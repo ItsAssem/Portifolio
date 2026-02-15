@@ -2,14 +2,14 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 
-import Card from "./Card/Card";
+import Card2 from "./Card/Card";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 interface Project {
   title: string;
-  Glink: string;
+  link: string;
   description: string;
   tags: string[];
 }
@@ -40,9 +40,9 @@ const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects }) => {
           {projects.map((project, index) => (
             <SwiperSlide key={index}>
               <div className="flex items-center justify-center h-full">
-                <Card
+                <Card2
                   title={project.title}
-                  githubLink={project.Glink}
+                  githubLink={project.link}
                   description={project.description}
                   tags={project.tags}
                 />

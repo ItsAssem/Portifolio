@@ -32,10 +32,10 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         </p>
 
         {/* Conditional Button */}
-        {project.Glink ? (
+        {project.link ? (
           <a
             className="mt-auto border-2 border-green-500/50 rounded-full px-6 py-3 text-sm sm:text-base font-semibold text-black bg-linear-to-r from-green-400 to-emerald-500 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 hover:shadow-green-500/40 hover:from-green-500 hover:to-emerald-600 active:scale-95 animate-pulse shrink-0"
-            href={project.Glink}
+            href={project.link}
             target="_blank"
             rel="noopener noreferrer"
           >
