@@ -16,9 +16,7 @@ function App() {
           <AboutMe />
         </div>
         <div className="skeleton2" id="section-2">
-          <div className="relative z-20 w-full p-3">
-            <MyProjects />
-          </div>
+          <MyProjects />
         </div>
         <div className="skeleton3" id="section-3">
           <ContactMe />

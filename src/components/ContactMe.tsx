@@ -2,57 +2,69 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const ContactMe = () => {
   return (
-    <div className="SCREEN w-full h-full flex justify-center items-center align-middle font-serif text-base relative ">
-      <div className="flex flex-col h-auto max-w-3xl border-2 p-5 m-5 gap-3 border-green-300   justify-center align-middle  animate-shadow-glow relative rounded-2xl bg-green-800/20 backdrop-blur-xl">
-        <div className=" ROW1Box flex flex-col  ">
-          <h2 className="  text-3xl font-bold text-center text-green-700 m-auto py-3 animate-text-glow">
+    <div className="w-full flex flex-col justify-center items-center font-serif text-base relative px-2 sm:px-4 md:px-6 lg:px-8">
+      {/* Mobile-First Compact Contact Card */}
+      <div className="w-full max-w-3xl bg-green-800/20 backdrop-blur-xl rounded-xl p-3 sm:p-4 md:p-6 m-2 sm:m-4 border-2 border-green-300 animate-shadow-glow">
+        {/* Header - Ultra Compact */}
+        <div className="text-center mb-3 sm:mb-4">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-green-400 animate-text-glow mb-2">
             Ready to talk?
           </h2>
-          <p className="text-center px-3">
-            Have a project in mind, a role to fill, or just want to connect over
-            the latest in tech? Drop me a line—I'm always excited to hear new
-            ideas.
+          <p className="text-xs sm:text-sm text-center text-[#14df9e]/80 px-2 leading-tight">
+            Have a project in mind? Let's connect over the latest in tech!
           </p>
         </div>
-        <div className="ROW2BOX h-auto relative flex flex-col  justify-evenly p-3 gap-3 mask-right-auto">
-          <div className=" relative hover:border-l-5 hover:bg-[#00df9a]/50 border-green-300 delay-100 rounded-2xl flex  flex-col justify-center align-middle items-center  sm:flex-row sm:justify-start sm:align-bottom sm:items-baseline ">
-            <h2 className="">Email: </h2>
+
+        {/* Contact Info - Compact Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
+          {/* Email - Compact */}
+          <div className="bg-black/20 rounded-lg p-2 sm:p-3 border border-green-500/30 hover:bg-[#00df9a]/20 transition-colors">
+            <h3 className="text-xs sm:text-sm font-semibold text-green-400 mb-1">
+              Email
+            </h3>
             <a
               href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=assemnajjar9999@gmail.com"
-              target="_blank" // Opens in a new tab
+              target="_blank"
               rel="noopener noreferrer"
+              className="text-xs sm:text-sm text-[#14df9e] hover:text-green-300 break-all"
             >
-              <p className=" px-3 wrap-anywhere break-all">
-                assemnajjar9999@gmail.com
-              </p>
+              assemnajjar9999@gmail.com
             </a>
           </div>
-          <div className="relative hover:border-l-5 hover:bg-[#00df9a]/50 border-green-300 delay-100 rounded-2xl flex  flex-col justify-center align-middle items-center  sm:flex-row sm:justify-start sm:align-bottom sm:items-baseline">
-            <h2 className=""> Location:</h2>
-            <p className="px-3">Birmingham, UK (Right to work Available)</p>
+
+          {/* Location - Compact */}
+          <div className="bg-black/20 rounded-lg p-2 sm:p-3 border border-green-500/30">
+            <h3 className="text-xs sm:text-sm font-semibold text-green-400 mb-1">
+              Location
+            </h3>
+            <p className="text-xs sm:text-sm text-[#14df9e]">Birmingham, UK</p>
+            <p className="text-xs text-green-300">Right to work Available</p>
           </div>
         </div>
-        <div className="ROW3 w-full flex flex-col sm:flex-row place-content-center justify-center align-middle items-center gap-5 p-3 ">
-          <div className="  w-1/2 sm:w-2/5 lg:w-1/4 border-2 flex flex-col justify-center items-center align-middle p-5 rounded-2xl  hover:scale-105 transition-transform  animate-shadow-glow hover:bg-[#00df9a]/50">
-            <a
-              href="https://github.com/ItsAssem"
-              target="_blank" // Opens in a new tab
-              rel="noopener noreferrer"
-            >
-              <FaGithub size={50} />
-              <span>GitHub</span>
-            </a>
-          </div>
-          <div className=" w-1/2 sm:w-2/5 lg:w-1/4 border-2 flex flex-col  justify-center items-center align-middle p-5 rounded-2xl hover:scale-105 transition-transform  animate-shadow-glow hover:bg-[#00df9a]/50">
-            <a
-              href="https://www.linkedin.com/in/asem-najjar-a5a332240/"
-              target="_blank" // Opens in a new tab
-              rel="noopener noreferrer"
-            >
-              <FaLinkedin size={50} />
-              <span>Linkedin</span>
-            </a>
-          </div>
+
+        {/* Social Links - Compact Row */}
+        <div className="flex justify-center gap-3 sm:gap-4">
+          {/* GitHub - Compact */}
+          <a
+            href="https://github.com/ItsAssem"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/30 hover:bg-[#00df9a]/20 transition-all hover:scale-105"
+          >
+            <FaGithub size={24} className="sm:size-32 mb-1 text-green-400" />
+            <span className="text-xs sm:text-sm text-[#14df9e]">GitHub</span>
+          </a>
+
+          {/* LinkedIn - Compact */}
+          <a
+            href="https://www.linkedin.com/in/asem-najjar-a5a332240/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/30 hover:bg-[#00df9a]/20 transition-all hover:scale-105"
+          >
+            <FaLinkedin size={24} className="sm:size-32 mb-1 text-green-400" />
+            <span className="text-xs sm:text-sm text-[#14df9e]">LinkedIn</span>
+          </a>
         </div>
       </div>
     </div>

@@ -5,59 +5,69 @@ import { ReactTyped } from "react-typed";
 const profilePictureUrl = "/asem pfp.png";
 const AboutMe = () => {
   return (
-    <section className="w-full min-h-screen flex flex-col justify-center items-center px-4">
-      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 bg-green-800/20 backdrop-blur-xl rounded-xl overflow-visible justify-items-center items-center p-4 sm:p-6 md:p-8 m-auto border border-green-500/20 shadow-inner">
-        <div className="flex flex-col justify-center items-center w-full h-auto p-4 sm:p-6 md:p-8 md:order-1 order-2 md:scale-100 scale-50 animate-pulse-slow">
-          <ProfileImage
-            url={profilePictureUrl}
-            alt="Assem Kanjo Alnajjar's profile picture"
-          />
-        </div>
-        <div className="flex flex-col justify-center items-center w-full h-auto p-4 sm:p-6 md:p-8 text-center space-y-4 font-inter md:order-2 order-1">
-          <header>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#14df9e] font-inter mb-2">
-              Assem Kanjo Alnajjar
-            </h1>
-            <p className="text-sm sm:text-base md:text-lg text-[#00df9a]/80 font-inter mb-4">
-              B.S. Computer Engineering @ Qatar University
-            </p>
-          </header>
-
-          <div className="h-12 flex items-center justify-center">
-            <ReactTyped
-              className="text-lg sm:text-xl md:text-2xl font-medium text-[#00df9a] font-fira-code"
-              aria-live="polite"
-              strings={[
-                "Computer Engineer",
-                "Software Developer",
-                "Full Stack Developer",
-                "AI Systems Engineer",
-              ]}
-              loop
-              typeSpeed={80}
-              backSpeed={40}
-            />
+    <section className="w-full flex flex-col justify-center items-center px-2 sm:px-4 md:px-6 lg:px-8">
+      {/* Mobile-First Compact Design */}
+      <div className="w-full max-w-4xl md:max-w-6xl lg:max-w-7xl bg-green-800/20 backdrop-blur-xl rounded-xl overflow-hidden justify-items-center items-center p-3 sm:p-4 md:p-6 lg:p-8 m-auto border border-green-500/20 shadow-inner">
+        {/* Mobile: Stacked Layout | Desktop: Side-by-Side */}
+        <div className="flex flex-col md:flex-row justify-center items-center w-full gap-3 sm:gap-4 md:gap-6">
+          {/* Profile Image - Mobile Compact | Desktop Contained */}
+          <div className="flex justify-center items-center w-full md:w-2/5 lg:w-1/3 p-2 sm:p-3 md:p-4">
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-40 lg:w-40 lg:h-48 rounded-lg overflow-hidden">
+              <ProfileImage
+                url={profilePictureUrl}
+                alt="Assem Kanjo Alnajjar's profile picture"
+              />
+            </div>
           </div>
 
-          <p className="text-sm sm:text-base md:text-lg text-[#14df9e]/90 font-inter leading-relaxed max-w-prose">
-            Computer Engineering graduate with 3+ years of experience in
-            hardware-software integration, autonomous systems, and real-time
-            control. Proficient in C/C++, Python, and embedded systems. Skilled
-            in developing AI-driven applications and full-stack web solutions.
-            Passionate about leveraging technology to solve complex problems and
-            drive innovation.
-          </p>
+          {/* Content - Mobile Compact | Desktop Balanced */}
+          <div className="flex flex-col justify-center items-center w-full md:w-3/5 lg:w-2/3 text-center space-y-2 sm:space-y-3 md:space-y-4 p-2 sm:p-3 md:p-4">
+            {/* Header - Compact */}
+            <header className="space-y-1">
+              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-green-400 font-inter">
+                Assem Kanjo Alnajjar
+              </h1>
+              <p className="text-xs sm:text-sm md:text-base text-[#00df9a]/80 font-inter">
+                B.S. Computer Engineering @ Qatar University
+              </p>
+            </header>
 
-          <a
-            href="https://drive.google.com/file/d/1E_iwrjTXlzQ42WGQIOcfqFM1eXshhOKI/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6"
-          >
-            <button className="px-6 py-3 text-sm sm:text-base font-semibold text-black bg-linear-to-r from-green-400 to-emerald-500 rounded-full border-2 border-green-500/30 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 hover:shadow-green-500/40 hover:from-green-500 hover:to-emerald-600 active:scale-95 animate-pulse">
-              Check Resume
-            </button>
-          </a>
+            {/* Typed Text - Compact */}
+            <div className="h-6 sm:h-8 md:h-10 flex items-center justify-center">
+              <ReactTyped
+                className="text-xs sm:text-sm md:text-base font-medium text-[#00df9a] font-fira-code"
+                aria-live="polite"
+                strings={[
+                  "Computer Engineer",
+                  "Software Developer",
+                  "Full Stack Developer",
+                  "AI Systems Engineer",
+                ]}
+                loop
+                typeSpeed={80}
+                backSpeed={40}
+              />
+            </div>
+
+            {/* Bio - Compact */}
+            <p className="text-xs sm:text-sm md:text-base text-[#14df9e]/90 font-inter leading-tight max-w-prose">
+              Computer Engineering graduate with 3+ years experience in
+              hardware-software integration, autonomous systems, and real-time
+              control.
+            </p>
+
+            {/* Resume Button - Compact */}
+            <a
+              href="https://drive.google.com/file/d/1E_iwrjTXlzQ42WGQIOcfqFM1eXshhOKI/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 sm:mt-3"
+            >
+              <button className="px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-black bg-linear-to-r from-green-400 to-emerald-500 rounded-full border border-green-500/30 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 hover:shadow-green-500/40 active:scale-95">
+                Resume
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </section>
