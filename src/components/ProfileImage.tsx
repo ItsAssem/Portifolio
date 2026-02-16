@@ -111,9 +111,9 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ url, alt }) => {
       alt={alt}
       // Fallback to placeholder if image fails to load
       onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/320")}
-      // Responsive sizing: 30% larger than original, square with rounded edges
+      // Responsive sizing: matches container dimensions, square with rounded edges
       // Glassmorphism effect with green theme matching website design
-      className="animate-shadow-glow mx-auto w-20 h-20 sm:w-52 sm:h-52 md:w-78 md:h-78 rounded-2xl object-cover object-center border-2 border-green-500/50 ring-2 sm:ring-3 md:ring-4 ring-green-500 ring-opacity-75 shadow-lg shadow-green-500/50 transition-transform duration-200 ease-out hover:shadow-xl hover:shadow-green-500/75 active:scale-95 backdrop-blur-sm"
+      className="animate-shadow-glow mx-auto w-full h-full rounded-2xl object-cover object-center border-2 border-green-500/50 ring-2 sm:ring-3 md:ring-4 ring-green-500 ring-opacity-75 shadow-lg shadow-green-500/50 transition-transform duration-200 ease-out hover:shadow-xl hover:shadow-green-500/75 active:scale-95 backdrop-blur-sm"
     />
   );
 };
