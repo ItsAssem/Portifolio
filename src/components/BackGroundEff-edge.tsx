@@ -1,28 +1,43 @@
 import "./BackGroundEff-edge.css";
 import "./BackGroundEff.css";
-import { isEdgeBrowser } from "../utils/browserDetection";
+import { useState, useEffect } from "react";
 
 /**
- * Conditional background effect component.
- * Renders original background for non-Edge browsers, spectrum for Edge.
+ * Responsive background effect component.
+ * Renders spectrum gradient on mobile devices and original grid animation on desktop.
  *
  * @component
- * @returns {JSX.Element} Appropriate background effect based on browser
+ * @returns {JSX.Element} Appropriate background effect based on screen size
  */
 export default function BackGroundEff() {
-  // Detect if user is on Edge browser
-  const isEdge = isEdgeBrowser();
+  const [isMobile, setIsMobile] = useState(false);
 
-  if (isEdge) {
-    // Return simple spectrum background for Edge
+  useEffect(() => {
+    // Check if screen size is mobile (768px and below)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Listen for window resize
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  if (isMobile) {
+    // Return spectrum background for mobile
     return (
       <div className="spectrum-container">
-        {/* Linear spectrum animation - Edge compatible */}
+        {/* Linear spectrum animation - mobile optimized */}
       </div>
     );
   }
 
-  // For non-Edge browsers, return original complex background
+  // For desktop, return original complex background
   return (
     <div className="grid-container">
       <div className="plane">
