@@ -1,31 +1,35 @@
 import "./BackGroundEff-edge.css";
 import "./BackGroundEff.css";
 import { useState, useEffect } from "react";
+import WateryBackground from "./WateryBackground";
 
 /**
  * Responsive background effect component.
- * Renders spectrum gradient on mobile devices and original grid animation on desktop.
+ * Renders spectrum gradient on mobile, watery effect on tablet, and original grid animation on desktop.
  *
  * @component
  * @returns {JSX.Element} Appropriate background effect based on screen size
  */
 export default function BackGroundEff() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
-    // Check if screen size is mobile (768px and below)
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+    // Check screen size and categorize device
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      setIsMobile(width <= 768);
+      setIsTablet(width > 768 && width <= 1024);
     };
 
     // Initial check
-    checkMobile();
+    checkDevice();
 
     // Listen for window resize
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener("resize", checkDevice);
 
     // Cleanup
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
   if (isMobile) {
@@ -37,17 +41,11 @@ export default function BackGroundEff() {
     );
   }
 
-  // For desktop, return original complex background
-  return (
-    <div className="grid-container">
-      <div className="plane">
-        <div className="grid"></div>
-        <div className="glow"></div>
-      </div>
-      <div className="plane">
-        <div className="grid"></div>
-        <div className="glow"></div>
-      </div>
-    </div>
-  );
+  if (isTablet) {
+    // Return watery background for tablet (and as an option for testing)
+    return <WateryBackground lowPowerMode={true} />;
+  }
+
+  // For desktop, return watery background (can switch to grid if needed)
+  return <WateryBackground />;
 }
