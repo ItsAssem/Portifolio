@@ -58,7 +58,7 @@ const AboutMe = () => {
 
             {/* Resume Button - Compact */}
             <a
-              href="https://drive.google.com/file/d/1E_iwrjTXlzQ42WGQIOcfqFM1eXshhOKI/view?usp=sharing"
+              href="https://drive.google.com/file/d/1yKxeI-xTp-6ca2Nj13bFv-a3E5ABxoko/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 sm:mt-3"
