@@ -1,5 +1,6 @@
-/* Light green to cyan gradient background with blur */
+/* Light green to cyan gradient background with blur - DISABLED */
 
+/*
 .spectrum-container {
   background: linear-gradient(
     45deg,
@@ -26,6 +27,7 @@
   filter: blur(1.5px);
   pointer-events: none;
 }
+*/
 
 @keyframes spectrumFlow {
   0% {
