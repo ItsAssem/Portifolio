@@ -1,46 +1,67 @@
 import React, { useEffect, useRef, useState } from "react";
 
 interface WateryBackgroundProps {
-  className?: string;
   lowPowerMode?: boolean;
 }
 
 const WateryBackground: React.FC<WateryBackgroundProps> = ({
-  className = "",
   lowPowerMode = false,
 }) => {
+  console.log("WateryBackground: Component mounting!");
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
-  // Caustic noise function for water effect
+  // Caustic noise function for drippy water effect
   const generateCaustic = (time: number, x: number, y: number) => {
     const scale = lowPowerMode ? 0.5 : 1.0;
     const speed = lowPowerMode ? 0.5 : 1.0;
 
-    // Create ripple-like caustic patterns
-    const ripple1 =
-      Math.sin((x * 0.01 + time * speed) * scale) *
-      Math.cos((y * 0.01 + time * speed * 0.7) * scale);
-    const ripple2 =
-      Math.sin((x * 0.02 - time * speed * 1.3) * scale) *
-      Math.sin((y * 0.015 + time * speed * 0.9) * scale);
-    const ripple3 = Math.cos(
-      (x * 0.008 + y * 0.008 + time * speed * 0.5) * scale,
+    // Create drippy water patterns with organic movement
+    const drip1 =
+      Math.sin((x * 0.005 + time * speed * 0.3) * scale) *
+      Math.cos((y * 0.008 + time * speed * 0.2) * scale);
+    const drip2 =
+      Math.sin((x * 0.003 - time * speed * 0.4) * scale) *
+      Math.cos((y * 0.006 + time * speed * 0.5) * scale);
+    const flow1 = Math.sin(
+      (x * 0.007 + y * 0.004 + time * speed * 0.6) * scale,
+    );
+    const flow2 = Math.cos(
+      (x * 0.004 - y * 0.005 + time * speed * 0.7) * scale,
     );
 
-    // Combine ripples for complex water effect
-    const combined = (ripple1 + ripple2 + ripple3) / 3.0;
+    // Add organic fluid movement
+    const organic =
+      Math.sin((x * 0.002 + y * 0.002 + time * speed * 0.1) * scale) *
+      Math.cos((x * 0.003 - y * 0.003 + time * speed * 0.15) * scale);
 
-    // Normalize to 0-1 range
+    // Combine for drippy, fluid water effect
+    const combined =
+      drip1 * 0.3 + drip2 * 0.3 + flow1 * 0.2 + flow2 * 0.2 + organic * 0.1;
+
+    // Normalize to 0-1 range with enhanced contrast
     return (combined + 1.0) / 2.0;
   };
 
   // Animation loop
   const animate = (ctx: CanvasRenderingContext2D, time: number) => {
     const { width, height } = dimensions;
-    if (!width || !height) return;
+    if (!width || !height) {
+      console.warn("WateryBackground: Invalid dimensions", { width, height });
+      return;
+    }
+
+    // SIMPLE TEST: Bright green background to verify canvas is working
+    ctx.fillStyle = "#00ff00"; // Bright green
+    ctx.fillRect(0, 0, width, height);
+
+    console.log("WateryBackground: Drawing bright green test", {
+      width,
+      height,
+    });
 
     // Clear canvas with dark gradient
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
@@ -58,10 +79,10 @@ const WateryBackground: React.FC<WateryBackgroundProps> = ({
       for (let x = 0; x < width; x += resolution) {
         const caustic = generateCaustic(time * 0.001, x, y);
 
-        // Convert to RGB with theme colors
-        const intensity = caustic * 0.4; // Reduce intensity for subtlety
-        const green = Math.floor(intensity * 223); // #00df9a RGB
-        const blue = Math.floor(intensity * 154); // #00df9a RGB
+        // Convert to RGB with theme colors - INCREASED INTENSITY
+        const intensity = caustic * 0.8; // Increased from 0.4 to 0.8
+        const green = Math.floor(intensity * 255); // Increased from 223 to 255
+        const blue = Math.floor(intensity * 200); // Increased from 154 to 200
 
         // Fill pixels in block for performance
         for (let dy = 0; dy < resolution && y + dy < height; dy++) {
@@ -70,7 +91,7 @@ const WateryBackground: React.FC<WateryBackgroundProps> = ({
             data[index] = 0; // R
             data[index + 1] = green; // G
             data[index + 2] = blue; // B
-            data[index + 3] = Math.floor(intensity * 102); // A (opacity-40)
+            data[index + 3] = Math.floor(intensity * 180); // A (increased from 102 to 180)
           }
         }
       }
@@ -111,14 +132,22 @@ const WateryBackground: React.FC<WateryBackgroundProps> = ({
   // Setup canvas and animation
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      console.error("WateryBackground: Canvas ref is null");
+      return;
+    }
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      console.error("WateryBackground: Could not get 2D context");
+      return;
+    }
 
     // Set canvas size
     canvas.width = dimensions.width;
     canvas.height = dimensions.height;
+
+    console.log("WateryBackground: Canvas dimensions set to", dimensions);
 
     let startTime = performance.now();
     const targetFPS = lowPowerMode ? 30 : 60;
@@ -137,6 +166,7 @@ const WateryBackground: React.FC<WateryBackgroundProps> = ({
     };
 
     animationRef.current = requestAnimationFrame(render);
+    console.log("WateryBackground: Animation loop started");
 
     return () => {
       if (animationRef.current) {
@@ -163,11 +193,13 @@ const WateryBackground: React.FC<WateryBackgroundProps> = ({
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 w-full h-full ${className}`}
+      className="fixed inset-0 w-full h-full"
       style={{
-        zIndex: -10,
-        opacity: 0.6,
+        zIndex: 0,
+        opacity: 0.8,
         mixBlendMode: "screen",
+        pointerEvents: "none",
+        background: "transparent",
       }}
     />
   );
