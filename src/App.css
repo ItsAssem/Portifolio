@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: #041b4e00;
+  background: linear-gradient(to bottom, #000000, #0f172a);
   overflow: hidden;
   overflow-x: hidden;
   position: relative;
@@ -23,45 +23,34 @@
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
-  flex-flow: column nowrap;
   background-color: transparent;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .skeleton-flexbox::-webkit-scrollbar {
   display: none;
 }
 
-/* Section styles */
+/* Section styles - contain: paint isolates each section's paint region */
 .skeleton1,
 .skeleton2,
 .skeleton3,
 .skeleton4 {
   scroll-snap-align: start;
   width: 100vw;
-  min-height: 100dvh; /* Changed to min-height to allow content expansion */
+  min-height: 100dvh;
   flex-shrink: 0;
   display: flex;
   justify-items: center;
   justify-content: center;
-  align-items: center; /* Changed to flex-start to align content near top */
+  align-items: center;
   background-color: transparent;
   z-index: 1;
-}
-
-/* Optional: Debug backgrounds */
-.skeleton1 {
-  background-color: rgba(247, 0, 0, 0);
-}
-.skeleton2 {
-  background-color: rgba(178, 214, 16, 0);
-}
-.skeleton3 {
-  background-color: rgba(179, 19, 126, 0);
-}
-.skeleton4 {
-  background-color: rgba(229, 207, 222, 0);
+  contain: paint layout;
+  transform: translateZ(0);
 }
 
 /* Content container */
@@ -115,17 +104,15 @@
 @media (max-width: 768px) {
   .skeleton {
     min-height: 100dvh;
-  }
-
-  .skeleton-flexbox {
-    -webkit-overflow-scrolling: touch;
+    background: linear-gradient(to bottom, #000000, #0f172a);
   }
 
   .skeleton1,
   .skeleton2,
   .skeleton3,
   .skeleton4 {
-    min-height: 100dvh; /* Ensure min-height for responsiveness */
+    min-height: 100dvh;
+    contain: paint layout;
   }
 
   .skeleton-link {
@@ -146,6 +133,7 @@
 @media (max-width: 480px) {
   .skeleton {
     padding: 0.25rem;
+    background: linear-gradient(to bottom, #000000, #0f172a);
   }
 
   .skeleton-image1,

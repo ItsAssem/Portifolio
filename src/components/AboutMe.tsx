@@ -7,7 +7,7 @@ const AboutMe = () => {
   return (
     <section className="w-full flex flex-col justify-center items-center px-2 sm:px-4 md:px-6 lg:px-8">
       {/* Mobile-First Compact Design */}
-      <div className="w-full max-w-5xl bg-green-800/20 backdrop-blur-xl rounded-xl justify-items-center items-center p-2 sm:p-3 md:p-4 lg:p-6 m-4 sm:m-6 border border-green-500/30 shadow-lg">
+      <div className="w-full max-w-5xl bg-green-900/40 rounded-xl justify-items-center items-center p-2 sm:p-3 md:p-4 lg:p-6 m-4 sm:m-6 border border-green-500/30 shadow-lg">
         {/* Mobile: Stacked Layout | Desktop: Side-by-Side */}
         <div className="flex flex-col md:flex-row justify-center items-center w-full gap-2 sm:gap-3 md:gap-4">
           {/* Profile Image - Mobile Compact | Desktop Contained */}
@@ -63,7 +63,7 @@ const AboutMe = () => {
               rel="noopener noreferrer"
               className="mt-2 sm:mt-3"
             >
-              <button className="px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm font-semibold text-black bg-linear-to-r from-green-400 to-emerald-500 rounded-full border border-green-500/30 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 hover:shadow-green-500/40 active:scale-95">
+              <button className="px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm font-semibold text-black bg-linear-to-r from-green-400 to-emerald-500 rounded-full border border-green-500/30 shadow-md shadow-black/20 transition-all duration-300 hover:scale-105 active:scale-95">
                 Resume
               </button>
             </a>

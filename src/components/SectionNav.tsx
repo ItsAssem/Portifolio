@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Home, Code, Mail } from "lucide-react";
 
 interface Section {
   id: string;
@@ -44,7 +43,8 @@ const SectionNav: React.FC<SectionNavProps> = ({ sections }) => {
 
     return () => {
       // Cleanup observer
-      Object.values(sectionRefs.current).forEach((element) => {
+      const currentRefs = sectionRefs.current;
+      Object.values(currentRefs).forEach((element) => {
         if (element) {
           observerRef.current?.unobserve(element);
         }
@@ -67,7 +67,7 @@ const SectionNav: React.FC<SectionNavProps> = ({ sections }) => {
     <>
       {/* Desktop Sidebar - Top Right, Full Height */}
       <div className="hidden lg:flex fixed right-0 top-0 h-full w-32 z-50">
-        <div className="h-full w-full bg-emerald-500/5 backdrop-blur-sm border-r border-white/10 rounded-lg flex flex-col items-center justify-center py-8 space-y-8">
+        <div className="h-full w-full bg-black/20 border-r border-white/10 rounded-lg flex flex-col items-center justify-center py-16 space-y-20">
           {/* Navigation Icons */}
           {sections.map((section) => (
             <button
@@ -75,10 +75,10 @@ const SectionNav: React.FC<SectionNavProps> = ({ sections }) => {
               id={`nav-${section.id}`}
               onClick={() => handleNavClick(section.id)}
               className={`
-                relative p-6 rounded-lg transition-all duration-200 ease-out group
+                relative p-8 rounded-lg transition-all duration-200 ease-out group
                 ${
                   activeSection === section.id
-                    ? "text-emerald-400 bg-emerald-500/20 shadow-lg shadow-emerald-500/50"
+                    ? "text-emerald-400 bg-emerald-500/20 ring-1 ring-emerald-500/40"
                     : "text-gray-400 hover:text-emerald-300 hover:bg-emerald-500/10"
                 }
               `}
@@ -101,24 +101,24 @@ const SectionNav: React.FC<SectionNavProps> = ({ sections }) => {
         <div className="flex items-center justify-center w-full">
           <div className="relative">
             {/* Navigation Icons */}
-            <div className="flex items-center justify-center space-x-6 bg-emerald-500/5 backdrop-blur-sm border-b border-white/10 rounded-lg px-6 py-4">
+            <div className="flex items-center justify-center space-x-8 bg-black/20 border-b border-white/10 rounded-lg px-6 py-3">
               {sections.map((section) => (
                 <button
                   key={section.id}
                   id={`nav-${section.id}`}
                   onClick={() => handleNavClick(section.id)}
                   className={`
-                    relative p-4 rounded-lg transition-all duration-200 ease-out group
+                    relative p-3 rounded-lg transition-all duration-200 ease-out group
                     ${
                       activeSection === section.id
-                        ? "text-emerald-400 bg-emerald-500/20 shadow-lg shadow-emerald-500/50"
+                        ? "text-emerald-400 bg-emerald-500/20 ring-1 ring-emerald-500/40"
                         : "text-gray-400 hover:text-emerald-300 hover:bg-emerald-500/10"
                     }
                   `}
                   style={{ minHeight: "44px", minWidth: "44px" }} // Mobile touch targets
                   aria-label={`Navigate to ${section.label}`}
                 >
-                  <div className="flex flex-col items-center space-y-2">
+                  <div className="flex flex-col items-center space-y-1">
                     {section.icon}
                     <span className="text-sm font-medium">{section.label}</span>
                   </div>

@@ -4,7 +4,7 @@ const ContactMe = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center font-serif text-base relative px-2 sm:px-4 md:px-6 lg:px-8">
       {/* Mobile-First Compact Contact Card */}
-      <div className="w-full max-w-3xl bg-green-800/20 backdrop-blur-xl rounded-xl p-3 sm:p-4 md:p-6 m-2 sm:m-4 border-2 border-green-300 animate-shadow-glow">
+      <div className="w-full max-w-3xl bg-green-900/40 backdrop-blur-xl rounded-xl p-3 sm:p-4 md:p-6 m-2 sm:m-4 border border-green-500/30">
         {/* Header - Ultra Compact */}
         <div className="text-center mb-3 sm:mb-4">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-green-400 animate-text-glow mb-2">
@@ -49,7 +49,7 @@ const ContactMe = () => {
             href="https://github.com/ItsAssem"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/30 hover:bg-[#00df9a]/20 transition-all hover:scale-105"
+            className="flex flex-col items-center p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/30 hover:bg-[#00df9a]/20 transition-all"
           >
             <FaGithub size={24} className="sm:size-32 mb-1 text-green-400" />
             <span className="text-xs sm:text-sm text-[#14df9e]">GitHub</span>
@@ -60,7 +60,7 @@ const ContactMe = () => {
             href="https://www.linkedin.com/in/asem-najjar-a5a332240/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/30 hover:bg-[#00df9a]/20 transition-all hover:scale-105"
+            className="flex flex-col items-center p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/30 hover:bg-[#00df9a]/20 transition-all"
           >
             <FaLinkedin size={24} className="sm:size-32 mb-1 text-green-400" />
             <span className="text-xs sm:text-sm text-[#14df9e]">LinkedIn</span>
