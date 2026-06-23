@@ -1,0 +1,11 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public read for portfolio visitors; edit documents in Firebase Console.
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

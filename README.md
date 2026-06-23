@@ -1,250 +1,172 @@
 # Portfolio Website
 
-A modern, full-stack portfolio website showcasing advanced web development skills with React, TypeScript, Supabase, and professional-grade architecture patterns.
+A modern portfolio built with React 19, TypeScript, Vite, Tailwind CSS, and Firebase Firestore. Projects are loaded in real time from Firestore, so you can update content in the Firebase Console without redeploying the site.
 
-## 🎯 Project Overview
+## Tech Stack
 
-This portfolio demonstrates end-to-end full-stack development capabilities through a dynamic, interactive web application featuring real-time project management, responsive design, and modern UI/UX patterns. The project serves as both a professional portfolio and a technical showcase of contemporary web development practices.
+| Layer | Technology |
+|---|---|
+| Frontend | React 19, TypeScript, Vite 7 |
+| Styling | Tailwind CSS v4, custom design tokens |
+| Data | Firebase Firestore (real-time `onSnapshot`) |
+| UI | Swiper, Lucide React, React Typed |
+| Hosting | Netlify |
 
-## 🛠️ Technology Stack
+## Features
 
-### Frontend Technologies
-- **React 19** - Latest React features with concurrent rendering and hooks
-- **TypeScript** - Type-safe development with strict configuration
-- **Vite** - Fast development server with HMR and optimized builds
-- **Tailwind CSS** - Utility-first CSS framework with custom design system
-- **Swiper.js** - Touch-friendly carousel/slider component library
+- **Live project data** — Firestore listener updates the carousel when you edit documents
+- **Scroll-snap sections** — Home, Projects, Contact with fixed section navigation
+- **Responsive layout** — Mobile-first cards, carousel, and nav offsets
+- **Accessible UI** — Skip link, semantic landmarks, focus styles, reduced-motion support
+- **Animated background** — Canvas caustic effect with static fallback for `prefers-reduced-motion`
+- **Profile hero** — Subtle 3D tilt and ambient glow on the profile image
 
-### Backend Technologies
-- **Supabase** - Backend-as-a-Service providing:
-  - PostgreSQL database with real-time subscriptions
-  - Authentication and authorization
-  - File storage and CDN
-  - Row-level security policies
+## Project Structure
 
-### Development Tools
-- **ESLint** - Code quality and consistency enforcement
-- **TypeScript Compiler** - Static type checking and compilation
-- **Git** - Version control with professional workflow
-
-## ✨ Key Features
-
-### Dynamic Content Management
-- Real-time project updates through Supabase backend
-- Optimistic UI updates with automatic synchronization
-- Custom data fetching hooks with loading and error states
-
-### Interactive User Experience
-- 3D mouse-tracking animations on profile images
-- Glassmorphism effects with backdrop filters
-- Smooth transitions and micro-interactions
-- Responsive design across all device sizes
-
-### Professional Architecture
-- Component-based architecture with reusable UI elements
-- Type-safe data flow with TypeScript interfaces
-- Environment-based configuration management
-- Security-first design with Row Level Security
-
-## 🏗️ Architecture Overview
-
-### Frontend Architecture
 ```
 src/
-├── components/           # React components
-│   ├── AboutMe.tsx      # Hero section with interactive profile
-│   ├── MyProjects.tsx   # Dynamic project showcase
-│   ├── ContactMe.tsx    # Contact section with links
-│   ├── ProfileImage.tsx # Interactive 3D profile picture
-│   ├── ProjectsCarousel.tsx # Swiper-based carousel
-│   └── Card/            # Reusable project cards
-├── hooks/               # Custom React hooks
-│   └── useProjects.ts   # Data fetching with state management
-├── lib/                 # Utilities and configurations
-│   └── supabaseClient.ts # Database client setup
-└── types/               # TypeScript type definitions
+├── components/
+│   ├── AboutMe.tsx           # Hero / intro
+│   ├── MyProjects.tsx        # Projects section
+│   ├── ContactMe.tsx         # Contact section
+│   ├── ProfileImage.tsx      # Profile photo with tilt effect
+│   ├── ProjectsCarousel.tsx  # Swiper carousel
+│   ├── SectionNav.tsx        # Section navigation
+│   ├── SectionCard.tsx       # Shared card surface
+│   └── Card/Card.tsx         # Project card
+├── config/
+│   └── profileImage.ts       # Profile image paths & fallbacks
+├── hooks/
+│   ├── useProjects.ts        # Firestore projects hook
+│   └── usePrefersReducedMotion.ts
+├── lib/
+│   └── firebase.ts             # Firebase client init
+├── App.tsx
+└── main.tsx
 ```
 
-### Backend Architecture
-- **Supabase PostgreSQL** - Primary data storage with relational integrity
-- **Row Level Security** - Granular access control policies
-- **Real-time Subscriptions** - Live data synchronization
-- **REST API** - Standard HTTP interface for data operations
-
-### Data Flow Architecture
-1. **Client Request** → React Component triggers data fetch
-2. **Custom Hook** → useProjects manages state and loading
-3. **Supabase Client** → Type-safe API calls to backend
-4. **Database Query** → PostgreSQL executes with RLS validation
-5. **Response Processing** → Data flows back through hook to UI
-6. **UI Update** → Component re-renders with new data
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js 18.0 or higher
-- npm or yarn package manager
-- Supabase account and project
+
+- Node.js 18+
+- npm
+- A Firebase project with Firestore enabled
 
 ### Installation
 
-1. **Clone the repository**
 ```bash
 git clone https://github.com/ItsAssem/Portifolio.git
 cd Portifolio
-```
-
-2. **Install dependencies**
-```bash
 npm install
 ```
 
-3. **Environment Setup**
-```bash
-# Create environment file
-cp .env.example .env.local
+### Environment variables
 
-# Add your Supabase credentials
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_supabase_anon_key
+Copy the example file and add your Firebase web app config:
+
+```bash
+cp .env.example .env.local
 ```
 
-4. **Database Setup**
-- Run the provided `database-schema.sql` in your Supabase SQL Editor
-- Verify Row Level Security policies are enabled
+```env
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
+VITE_FIREBASE_STORAGE_BUCKET=...
+VITE_FIREBASE_MESSAGING_SENDER_ID=...
+VITE_FIREBASE_APP_ID=...
+```
 
-5. **Start Development Server**
+Get these from **Firebase Console → Project settings → Your apps → Web app**.
+
+Add the same variables in **Netlify → Site settings → Environment variables** for production.
+
+### Firestore setup
+
+1. Create a Firestore database in your Firebase project
+2. Deploy security rules from this repo:
+
+   ```bash
+   npx firebase deploy --only firestore:rules
+   ```
+
+   (Requires `firebase login` and access to the project in `.firebaserc`.)
+
+3. Create a `projects` collection. Each document should have:
+
+   | Field | Type | Notes |
+   |---|---|---|
+   | `title` | string | Project name |
+   | `description` | string | Full description |
+   | `tags` | array | e.g. `["React", "TypeScript"]` |
+   | `link` | string | Demo/repo URL, or `""` |
+   | `order_index` | number | Lower values appear first |
+   | `created_at` | string | Optional ISO timestamp |
+   | `updated_at` | string | Optional ISO timestamp |
+
+### Run locally
+
 ```bash
 npm run dev
-```
-
-6. **Build for Production**
-```bash
 npm run build
 npm run preview
+npm run lint
 ```
 
-## 🔧 Configuration
+## Managing Projects (no redeploy)
 
-### Environment Variables
+1. Open **Firebase Console → Firestore → `projects`**
+2. Add, edit, or delete documents
+3. Changes appear on the live site within seconds
+
+Writes from the public website are blocked by `firestore.rules` (`allow write: if false`). Only the Firebase Console (or future authenticated admin) can modify data.
+
+## Profile Image
+
+Place your photo in `public/` (e.g. `public/asem-pfp.png`). The app tries several paths and falls back to `public/asem-pfp.svg` if the primary file is missing.
+
+Optional override:
+
 ```env
-# Required for Supabase connection
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your-anon-key
+VITE_PROFILE_IMAGE_URL=/your-image.png
 ```
 
-### Database Schema
-The projects table structure:
-```sql
-CREATE TABLE projects (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title TEXT NOT NULL,
-  description TEXT NOT NULL,
-  tags TEXT[] DEFAULT '{}',
-  link TEXT,
-  order_index INTEGER DEFAULT 0,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
+## Design System
 
-## 🎨 Design System
+| Token | Value |
+|---|---|
+| Brand primary | `#00df9a` |
+| Brand secondary | `#14df9e` |
+| Surface | `green-900/40` with backdrop blur |
+| Fonts | Inter (body), IBM Plex Mono (accent) |
 
-### Color Palette
-- **Primary Green**: `#00df9a` (Brand accent)
-- **Secondary Green**: `#14df9e` (Lighter variant)
-- **Background**: Black with transparency overlays
-- **Text**: Green variations with opacity levels
+## Security Notes
 
-### Typography
-- **Headings**: Custom fonts with glow effects
-- **Body**: System fonts for optimal readability
-- **Code**: Monospace fonts for technical content
+### Safe to commit publicly
 
-### Component Patterns
-- **Glassmorphism**: Backdrop blur with transparency
-- **Neon Effects**: Green glow with shadow animations
-- **Responsive Grid**: Mobile-first breakpoint system
-- **Micro-interactions**: Hover states and smooth transitions
+| File | Contents |
+|---|---|
+| `.firebaserc` | Firebase **project ID alias** only — not a credential |
+| `firebase.json` | Points to `firestore.rules` |
+| `firestore.rules` | Public security rules (intended to be version-controlled) |
 
-## 📊 Performance Metrics
+Firebase client API keys in `VITE_FIREBASE_*` are designed for browser use. Restrict them in **Google Cloud Console → APIs & Services → Credentials** to your domains (e.g. `localhost`, `*.netlify.app`, your custom domain).
 
-### Optimization Strategies
-- **Bundle Splitting**: Lazy loading with React.lazy
-- **Image Optimization**: WebP format with lazy loading
-- **Code Minification**: Production build optimizations
-- **Caching**: Service worker and browser caching
+### Never commit
 
-### Performance Targets
-- **Lighthouse Score**: 95+ Performance
-- **Core Web Vitals**: Optimized LCP, FID, CLS
-- **Bundle Size**: < 100KB gzipped
-- **Load Time**: < 2 seconds
+- `.env.local` / any file with real API keys
+- `serviceAccountKey.json` (Firebase Admin private keys)
 
-## 🔒 Security Implementation
+## Deployment (Netlify)
 
-### Row Level Security
-```sql
--- Public read access for projects
-CREATE POLICY "Enable read access for all users" ON projects
-  FOR SELECT USING (true);
+The repo includes `netlify.toml` with SPA redirects. After connecting the repo:
 
--- Authenticated write access
-CREATE POLICY "Enable insert for authenticated users" ON projects
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
-```
+1. Set all `VITE_FIREBASE_*` environment variables
+2. Deploy — build command: `npm run build`, publish directory: `dist`
 
-### Security Best Practices
-- Environment variable protection
-- Input validation and sanitization
-- Secure API key management
-- HTTPS enforcement in production
+Code deploys are only needed for frontend changes. Project content updates happen entirely in Firestore.
 
-## 🚀 Deployment
+## License
 
-### Vercel (Recommended)
-1. Connect repository to Vercel
-2. Configure environment variables
-3. Automatic deployment on push to main
-4. Custom domain configuration
-
-### Build Commands
-```bash
-npm run build    # Production build
-npm run preview  # Local preview
-npm run lint     # Code quality check
-```
-
-## 🧪 Testing Strategy
-
-### Frontend Testing
-- **Unit Tests**: Jest + React Testing Library
-- **Component Testing**: Storybook integration
-- **E2E Testing**: Cypress automation
-- **Accessibility**: Axe DevTools integration
-
-### Backend Testing
-- **Database Testing**: Supabase test suite
-- **API Testing**: Postman collections
-- **Integration Testing**: End-to-end workflows
-
-## 🎯 Recent Updates
-
-### UI/UX Improvements (v2.0)
-- **Card Overflow Fix**: Resolved border clipping and container issues
-- **Pagination Optimization**: Fixed positioning and spacing for better UX
-- **Mobile-First Design**: Implemented compact layouts for Android browser UI
-- **Profile Image Enhancement**: Fixed overflow and responsive sizing
-- **Custom Favicon**: Added branded SVG/PNG favicon for browser tabs
-- **Glass Morphism**: Enhanced visual effects with proper containment
-- **Responsive Architecture**: Improved breakpoint handling across all devices
-
-### Performance Enhancements
-- **Component Optimization**: Reduced padding and improved containment
-- **CSS Cleanup**: Removed conflicting classes causing visual artifacts
-- **Layout Efficiency**: Optimized spacing for mobile and desktop
-- **Animation Performance**: Smooth transitions without layout shifts
-
----
-
-**Built with professional full-stack standards demonstrating enterprise-grade development practices**
+Private portfolio project — all rights reserved.

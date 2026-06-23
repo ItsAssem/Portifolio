@@ -6,7 +6,6 @@ import MyProjects from "./components/MyProjects";
 import SectionNav from "./components/SectionNav";
 import { Home, Code, Mail } from "lucide-react";
 
-// Define sections for navigation
 const sections = [
   { id: "section-1", label: "Home", icon: <Home size={20} /> },
   { id: "section-2", label: "Projects", icon: <Code size={20} /> },
@@ -16,20 +15,22 @@ const sections = [
 function App() {
   return (
     <div className="skeleton">
+      <a href="#section-1" className="skip-link">
+        Skip to content
+      </a>
       <BackGroundEff />
       <SectionNav sections={sections} />
-      <div className="skeleton-flexbox">
-        <nav className="skeleton-nav"></nav>
-        <div className="skeleton1" id="section-1">
+      <main className="skeleton-flexbox relative z-10">
+        <section id="section-1" aria-label="About" className="skeleton1">
           <AboutMe />
-        </div>
-        <div className="skeleton2" id="section-2">
+        </section>
+        <section id="section-2" aria-label="Projects" className="skeleton2">
           <MyProjects />
-        </div>
-        <div className="skeleton3" id="section-3">
+        </section>
+        <section id="section-3" aria-label="Contact" className="skeleton3">
           <ContactMe />
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }

@@ -1,120 +1,109 @@
-import React, { useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import {
+  PROFILE_IMAGE_CANDIDATES,
+  PROFILE_IMAGE_OBJECT_POSITION,
+  PROFILE_IMAGE_SCALE,
+} from "../config/profileImage";
 
-/**
- * Props for the ProfileImage component
- * @interface ProfileImageProps
- * @property {string} url - URL of the profile image to display
- * @property {string} alt - Alt text for accessibility and SEO
- */
 interface ProfileImageProps {
-  url: string;
+  url?: string;
   alt: string;
 }
 
-/**
- * ProfileImage component - Interactive profile picture with 3D mouse tracking effects.
- *
- * Features responsive sizing, glassmorphism styling, and accessibility considerations.
- * Includes mouse-tracking 3D rotation effects with respect for user's motion preferences.
- *
- * @component
- * @param {ProfileImageProps} props - Component props
- * @returns {JSX.Element} Rendered profile image with interactive effects
- *
- * @example
- * ```tsx
- * <ProfileImage
- *   url="/path/to/profile.jpg"
- *   alt="Assem Kanjo Alnajjar's profile picture"
- * />
- * ```
- */
-const ProfileImage: React.FC<ProfileImageProps> = ({ url, alt }) => {
-  // Reference to the image DOM element for 3D effect calculations
-  const imgRef = useRef<HTMLImageElement>(null);
+const ProfileImage = ({ url, alt }: ProfileImageProps) => {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const candidates = url
+    ? [url, ...PROFILE_IMAGE_CANDIDATES.filter((candidate) => candidate !== url)]
+    : PROFILE_IMAGE_CANDIDATES;
+  const [candidateIndex, setCandidateIndex] = useState(0);
+  const src = candidates[candidateIndex] ?? PROFILE_IMAGE_CANDIDATES.at(-1)!;
 
-  /**
-   * Sets up 3D mouse tracking effect for the profile image.
-   * Calculates rotation based on mouse position relative to image center.
-   * Respects user's motion preferences for accessibility.
-   */
   useEffect(() => {
-    const img = imgRef.current;
-    if (!img) return;
+    setCandidateIndex(0);
+  }, [url]);
 
-    // Track last animation frame to prevent performance issues
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame || prefersReducedMotion) return;
+
     let lastFrame = 0;
 
-    /**
-     * Handles mouse movement over the image to create 3D rotation effect.
-     * Uses requestAnimationFrame for smooth 60fps animations.
-     *
-     * @param {MouseEvent} e - Mouse movement event
-     */
     const handleMouseMove = (e: MouseEvent) => {
-      // Throttle animations to prevent performance issues
       if (!lastFrame) {
         lastFrame = requestAnimationFrame(() => {
-          // Calculate image center coordinates for rotation calculations
-          const rect = img.getBoundingClientRect();
-          const imgCenterX = rect.left + rect.width / 2;
-          const imgCenterY = rect.top + rect.height / 2;
+          const rect = frame.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const deltaX = (e.clientX - centerX) / rect.width;
+          const deltaY = (e.clientY - centerY) / rect.height;
+          const rotateX = deltaY * -8;
+          const rotateY = deltaX * 8;
 
-          // Calculate distance from mouse to image center
-          const deltaX = e.clientX - imgCenterX;
-          const deltaY = e.clientY - imgCenterY;
-
-          // Convert mouse position to rotation angles (max 15 degrees)
-          const rotateX = (deltaY / rect.height) * -15;
-          const rotateY = (deltaX / rect.width) * 15;
-
-          // Apply 3D transformation with perspective
-          img.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          frame.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
           lastFrame = 0;
         });
       }
     };
 
-    /**
-     * Resets image rotation when mouse leaves the image area.
-     * Cancels any pending animation frames for clean state reset.
-     */
     const handleMouseLeave = () => {
       cancelAnimationFrame(lastFrame);
       lastFrame = 0;
-      img.style.transform = "perspective(500px) rotateX(0deg) rotateY(0deg)";
+      frame.style.transform =
+        "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
     };
 
-    // Check if user prefers reduced motion for accessibility
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    frame.addEventListener("mousemove", handleMouseMove);
+    frame.addEventListener("mouseleave", handleMouseLeave);
 
-    // Only add mouse tracking if user doesn't prefer reduced motion
-    if (!prefersReducedMotion) {
-      img.addEventListener("mousemove", handleMouseMove);
-      img.addEventListener("mouseleave", handleMouseLeave);
-    }
-
-    // Cleanup event listeners and animation frames on unmount
     return () => {
-      img.removeEventListener("mousemove", handleMouseMove);
-      img.removeEventListener("mouseleave", handleMouseLeave);
+      frame.removeEventListener("mousemove", handleMouseMove);
+      frame.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(lastFrame);
     };
-  }, []);
+  }, [src, prefersReducedMotion]);
+
+  const handleError = () => {
+    setCandidateIndex((current) => {
+      if (current < candidates.length - 1) {
+        return current + 1;
+      }
+      return current;
+    });
+  };
 
   return (
-    <img
-      ref={imgRef}
-      src={url}
-      alt={alt}
-      // Fallback to placeholder if image fails to load
-      onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/320")}
-      // Responsive sizing: matches container dimensions, square with rounded edges
-      // Glassmorphism effect with green theme matching website design
-      className="animate-shadow-glow mx-auto w-full h-full rounded-2xl object-cover object-center border-2 border-green-500/50 ring-2 sm:ring-3 md:ring-4 ring-green-500 ring-opacity-75 shadow-lg shadow-green-500/50 transition-transform duration-200 ease-out hover:shadow-xl hover:shadow-green-500/75 active:scale-95 backdrop-blur-sm"
-    />
+    <div className="group relative w-full h-full">
+      <div
+        className="pointer-events-none absolute -inset-3 rounded-2xl bg-brand-primary/25 blur-2xl opacity-50 transition-opacity duration-500 group-hover:opacity-75"
+        aria-hidden="true"
+      />
+
+      <div
+        ref={frameRef}
+        className="relative h-full w-full overflow-hidden rounded-2xl border border-green-500/30 shadow-[0_8px_32px_rgba(0,223,154,0.18)] transition-[transform,box-shadow] duration-300 ease-out will-change-transform group-hover:shadow-[0_12px_40px_rgba(0,223,154,0.28)]"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        <img
+          src={src}
+          alt={alt}
+          onError={handleError}
+          loading="eager"
+          decoding="async"
+          className="h-full w-full object-cover"
+          style={{
+            objectPosition: PROFILE_IMAGE_OBJECT_POSITION,
+            transform: `scale(${PROFILE_IMAGE_SCALE})`,
+          }}
+        />
+
+        <div
+          className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
   );
 };
 
